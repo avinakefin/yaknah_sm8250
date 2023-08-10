@@ -1,5 +1,23 @@
-![photo_2023-03-04_04-27-38](https://github.com/Rohail33/Realking_kernel_sm8250/assets/56790058/baf6f83f-7607-46d4-a4f2-b89ce0befbab)
+Linux kernel
+============
 
-. Kernel by Rohail-Khan
-Donate : https://www.paypal.me/RohailkhanRK
-         https://www.buymeacoffee.com/RohailRK
+There are several guides for kernel developers and users. These guides can
+be rendered in a number of formats, like HTML and PDF. Please read
+Documentation/admin-guide/README.rst first.
+
+In order to build the documentation, use ``make htmldocs`` or
+``make pdfdocs``.  The formatted documentation can also be read online at:
+
+    https://www.kernel.org/doc/html/latest/
+
+There are various text files in the Documentation/ subdirectory,
+several of them using the Restructured Text markup notation.
+See Documentation/00-INDEX for a list of what is contained in each file.
+
+Please read the Documentation/process/changes.rst file, as it contains the
+requirements for building and running the kernel, and information about
+the problems which may result by upgrading your kernel.
+
+This kernel supported KernelSU by default
+for dev please use curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+Do this Everytime you clone the repo bcz this kernel has the support for Kernel-SU and it needs to be recloned and checkout to latest stable tag.
