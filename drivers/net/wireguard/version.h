@@ -1,1 +1,3 @@
-#define WIREGUARD_VERSION "1.0.20230506-Samsoe[R]"
+#ifndef WIREGUARD_VERSION
+#define WIREGUARD_VERSION "1.0.20230707-Samsoe[R]"
+#endif

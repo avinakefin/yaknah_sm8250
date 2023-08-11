@@ -9,8 +9,8 @@
 #include "queueing.h"
 #include "ratelimiter.h"
 #include "netlink.h"
-
-#include <uapi/linux/wireguard.h>
+#include "uapi/wireguard.h"
+#include "crypto/zinc.h"
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -21,6 +21,11 @@ static int __init wg_mod_init(void)
 {
 	int ret;
 
+	if ((ret = chacha20_mod_init()) || (ret = poly1305_mod_init()) ||
+	    (ret = chacha20poly1305_mod_init()) || (ret = blake2s_mod_init()) ||
+	    (ret = curve25519_mod_init()))
+		return ret;
+
 	ret = wg_allowedips_slab_init();
 	if (ret < 0)
 		goto err_allowedips;
@@ -29,7 +34,7 @@ static int __init wg_mod_init(void)
 	ret = -ENOTRECOVERABLE;
 	if (!wg_allowedips_selftest() || !wg_packet_counter_selftest() ||
 	    !wg_ratelimiter_selftest())
-		goto err_device;
+		goto err_peer;
 #endif
 	wg_noise_init();
 
@@ -76,3 +81,4 @@ MODULE_AUTHOR("Jason A. Donenfeld <Jason@zx2c4.com>");
 MODULE_VERSION(WIREGUARD_VERSION);
 MODULE_ALIAS_RTNL_LINK(KBUILD_MODNAME);
 MODULE_ALIAS_GENL_FAMILY(WG_GENL_NAME);
+MODULE_INFO(intree, "Y");
