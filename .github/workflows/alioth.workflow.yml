@@ -1,0 +1,24 @@
+name: Kernel Alioth
+run-name: Kernel Alioth
+
+on:
+  push:
+    branches: [ base ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: nexgang/ubuntu:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Kernel Alioth
+        run: bash build.sh null alioth null
+        env:
+           token: ${{ secrets.TOKEN }}
+           chat_id: ${{ secrets.CHAT_ID }}
+           build_user: ${{ secrets.BUILD_USER }}
+           host: ${{ secrets.HOST }}
